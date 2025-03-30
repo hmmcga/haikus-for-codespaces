@@ -1,0 +1,245 @@
+	<!DOCTYPE html>
+	<html lang="en" ng-app="BKWEB" ng-cloak ng-init="wl=1">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="description" content="Find best deals at Biyaheko for Flight Tickets, Hotels, Holiday Packages and Bus Reservations for Philippines &amp; International travel. Book cheap air tickets online for Domestic &amp; International airlines, customized holiday packages and special deals on Hotel Bookings.">
+	<meta name="keywords" content="Philippines,Philippines travel,B2B, Cebu Pacific, ZestAir, Philippines Airlines, Airphil Express,cheap air tickets, cheap flights, flight, hotels, hotel, holidays, bus tickets, air travel, air tickets, holiday packages, travel packages,hnI-5OkMOvjiZwsaxf2-dsQ_lOg">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" />
+
+	<link href="/DreamJourney/Content/Style0_1?v=sV_dZHZYLJ4--H3BL4mNx0v5TRnwBqQhS6DsdVMCGM41" rel="stylesheet"/>
+
+	
+	<link href="/DreamJourney/Content/BkwebStyle0_1?v=k7R63txkOosxIHuMIZ9diCIzOZI3udzq-yRJTuKYs6k1" rel="stylesheet"/>
+
+	
+	<link href="/DreamJourney/Content/Css/md-data-table.css" rel="stylesheet" />
+
+	<style>
+	md-menu-bar {
+	padding: 0px;
+	}
+	</style>
+	</head>
+	<body ng-controller="LayoutCtrl">
+	<title ng-bind-template="{{titlecontent}}"> </title>
+	<link href="{{favicon}}" rel="shortcut icon" type="image/x-icon" />
+
+	<div data-loading class="layout">
+	<div>
+	<md-progress-linear style="z-index: 10001; position: fixed;" md-mode="indeterminate" class="md-hue-2" md-diameter="40"></md-progress-linear>
+	<md-backdrop class="md-dialog-backdrop md-opaque ng-scope" style="height: 100%; position: fixed;z-index: 10000; opacity: 0.12;" aria-hidden="true"></md-backdrop>
+	</div>
+	</div>
+	<div layout="row" ng-if="IsLoggedIn">
+	<div class="flex-5" hide-xs>&nbsp;</div>
+	<div class="flex-90" flex-xs="100">
+	<div class="layout-row flex" layout-align="start end" style="background-color:#ffffff">
+	<div class="flex-gt-xs-60" ng-if="Logoimage" style="margin-bottom:35px">
+	<img style="cursor:pointer;padding:5px" ng-click="Gotomenu('home');" ng-src="{{Logoimage}}" class="flex-xs-90 flex-gt-xs-60" />
+	</div>
+	<div class="flex-gt-xs-100 layout-padding hide-xs" ng-if="IsLoggedIn" style="color:#0f2b4a; font-size: 14px;text-align:right">
+	
+	<div layout="row" layout-align="end center" flex>
+	
+	<div ng-if="wl =='0'">
+	<div flex>
+	<a href="https://www.youtube.com/c/BiyaheKoChannel?sub_confirmation=1" target="#">
+
+	<img src="/DreamJourney/Content/Images/_youtube.png" style="height:23px;" />
+
+	</a>
+	</div>
+	</div>
+	<div ng-if="wl =='0'">
+	<div flex>
+	<ng-md-icon icon="picture_as_pdf" style="color: #ae2121; font-size:medium; width: 30px; " size="28"></ng-md-icon><a href="/Pdf/BK_Manual.pdf" target="#" style="color: #120a75; text-decoration: none;">
+	<b>User Manual</b>&nbsp;&nbsp;&nbsp;
+	</a>
+	</div>
+	</div>
+	
+	<div>
+	<div class="flex NM" layout-align="center center" layout="row" style="font-size: 14px; border-radius: 5px; background-color: #0f2b4a; color: #fff; padding: 4px 0">
+	<div layout>
+	
+	<div flex="15">
+	<ng-md-icon icon="refresh" class="link" ng-click="GetBalance();" size="20" style="color:rgb(255, 255, 255)"></ng-md-icon>
+	</div>
+	<div flex style="text-align: right;" ng-if="BalanceView">
+	<lable style="color:rgb(255, 255, 255)"> PHP &nbsp; {{BalanceAmt | number:2}} </lable>
+	</div>
+	
+	<div flex style="text-align: left;font-size:12px" ng-if="!BalanceView">
+	BALANCE AMOUNT
+	</div>
+	</div>
+	</div>
+	</div>
+	<div>
+	<md-menu md-position-mode="target-right target">
+	<ng-md-icon icon="account_circle" size="32" class="hide-xs" style="cursor: pointer; top: 0px; vertical-align: sub; margin-right: 10px;" ng-click="$mdOpenMenu()"></ng-md-icon>
+	<md-menu-content>
+	<md-menu-item aria-label>
+	<md-button>
+	<b style="color: #0f2b4a;" title="{{AgentDetails.COMPANYNAME |uppercase}}">
+	{{AgentDetails.COMPANYNAME | limitTo: 40 |uppercase}}{{AgentDetails.COMPANYNAME.length > 40 ? '...' : '' ||uppercase}}
+	</b>
+	</md-button>
+	</md-menu-item>
+	<md-menu-item aria-label>
+	<md-button><b style="color: #0f2b4a;">{{AgentDetails.TERMINALID|uppercase}}</b></md-button>
+	</md-menu-item>
+	<md-menu-item aria-label>
+	<md-button ng-click="Gotomenu('accountstatement')"><b style="color: #0f2b4a;">Account Statement</b></md-button>
+	</md-menu-item>
+	<md-menu-item aria-label>
+	<md-button ng-click="Gotomenu('profile')"><b style="color: #0f2b4a;">My Profile</b></md-button>
+	</md-menu-item>
+	
+	<md-menu-item aria-label>
+	<md-button ng-click="Gotomenu('changepassword')"><b style="color: #0f2b4a;">Change Password</b></md-button>
+	</md-menu-item>
+	<md-menu-item aria-label>
+	<md-button ng-click="GotoLogout();"><b style="color: #0f2b4a;">Logout</b></md-button>
+	</md-menu-item>
+	</md-menu-content>
+	</md-menu>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="flex-5" hide-xs>&nbsp;</div>
+	</div>
+	<div class="layout-column">
+	<div ng-if="IsLoggedIn" class="hide-sm hide-md hide-lg" hidden>
+	<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" md-disable-close-events>
+	<md-content class="layout-padding bgprimary">
+	<div ng-repeat="Menu in Menus">
+	<div class="white" style="cursor:pointer;" ng-click="ShowSubMenu = (ShowSubMenu =='Myhide' ? 'Myshow' : 'Myhide')">
+	<div class="layout-row layout-align-space-between-center">
+	<div class="md-padding"> {{Menu.Main | uppercase}}</div>
+	<div ng-init="ShowSubMenu='Myhide'">
+	<md-button aria-label="test" ng-click="ShowSubMenu = (ShowSubMenu =='Myhide' ? 'Myshow' : 'Myhide')">
+	<ng-md-icon icon="{{ShowSubMenu =='Myshow' ? 'expand_less':'expand_more'}}" style="color:#fff;"></ng-md-icon>
+	</md-button>
+	</div>
+	</div>
+	<div ng-class="ShowSubMenu">
+	<div ng-repeat="item in Menu.SubMenu" class="white">
+	<md-button ng-click="Gotomenu(item.Url)"><b>{{item.Name | uppercase}}</b></md-button>
+	<md-divider></md-divider>
+	</div>
+	</div>
+	</div>
+	<md-divider></md-divider>
+	</div>
+	<div class="layout-row layout-align-space-between-center">
+	<div class="md-padding white">
+	<md-button ng-click="GotoLogout();">
+	<b>Logout</b>
+	</md-button>
+	</div>
+	</div>
+	</md-content>
+	</md-sidenav>
+	
+	
+	</div>
+	<div ng-if="IsLoggedIn" class="layout flex" id="menu">
+	<div class="flex-5" hide-xs>&nbsp;</div>
+	<div class="flex-90" flex-xs="100">
+	
+	<div class="layout-row hide-xs bg-Color-2 " style="background-color: #0f2b4a; color: rgb(255, 255, 255); ">
+	<div style="border-right: 1px solid rgb(221, 221, 221);" class="flex-5 layout layout-align-center-center">
+	<ng-md-icon aria-label icon="home" ng-click="Gotomenu('home');"></ng-md-icon>
+	</div>
+	<div ng-if="Menu.ID != '10'" ng-repeat="Menu in Menus" style="border-right: 1px solid rgb(221, 221, 221);">
+	<md-menu-bar>
+	<md-menu ng-if="Menu.SubMenu">
+	<md-button ng-click="$mdOpenMenu()" class="menuBtn">
+	<ng-md-icon icon="{{Menu.Icon}}"></ng-md-icon>
+	<b>{{Menu.Main}}</b>
+	</md-button>
+	<md-menu-content width="3">
+	<md-menu-item ng-repeat="item in Menu.SubMenu">
+	<md-button aria-label ng-click="Gotomenu(item.Url)"><b style="color: #0f2b4a;">{{item.Name | uppercase}}</b></md-button>
+	</md-menu-item>
+	</md-menu-content>
+	</md-menu>
+	<md-menu ng-if="!Menu.SubMenu">
+	<md-button ng-click="Gotomenu(Menu.Url)">
+	<ng-md-icon icon="{{Menu.Icon}}"></ng-md-icon>
+	<b>{{Menu.Main}}</b>
+	</md-button>
+	
+	</md-menu>
+	</md-menu-bar>
+	</div>
+	
+	
+	<div style="border-right: 1px solid rgb(221, 221, 221);" class="glow">
+	
+	</div>
+	</div>
+	</div>
+	<div class="flex-5" hide-xs>&nbsp;</div>
+	</div>
+	<div class="layout flex BodyContent">
+	<div class="flex-5" hide-xs ng-if="IsLoggedIn">&nbsp;</div>
+	<div ng-class="(IsLoggedIn ? 'flex-90' : 'flex-100' )" flex-xs="100">
+	
+	
+	<div ng-view ng-cloak></div>
+	
+	</div>
+	<div class="flex-5" hide-xs ng-if="IsLoggedIn">&nbsp;</div>
+	</div>
+	</div>
+	<div ng-if="!IsLoggedIn" style="height:10px"></div>
+	<div id="footer">
+	<div style="background-color: #e3e3e3;text-align:center;padding:10px 0px">
+	<img src="/DreamJourney/Content/Images/our-partners.gif" alt="FooterImg" class="flex-100" style="width:100%" />
+	</div>
+	<div style="background-color: rgb(58,58,58); margin-top: -3px; color: rgb(102,102,102); display:none;" layout="row" layout-align="space-around center">
+	<div flex="100" layout="row">
+	<div flex="25"></div>
+	<div flex="10"><a style="color:#808080; text-decoration:none;" href="#">HOME</a></div>
+
+	<div flex="10"><a style="color:#808080;text-decoration:none;" href="#/aboutus">ABOUT US</a></div>
+	<div flex="10"><a style="color:#808080;text-decoration:none;" href="#/contactus">CONTACT US</a></div>
+	<div flex="10"><a style="color:#808080;text-decoration:none;" href="#/privacypolicy">PRIVACY POLICY</a></div>
+
+	<div flex="10"><a style="color:#808080;text-decoration:none;" href="#/contactus">UTILITIES</a></div>
+
+	<div flex="25"></div>
+	</div>
+	</div>
+	<div style="background-color: rgb(58,58,58); margin-top: -3px; color: rgb(102,102,102); " class="layout-row layout-padding layout-align-space-around-center">
+	<div><b>COPYRIGHT <ng-md-icon icon="copyright" size="18"></ng-md-icon> 2022 <span ng-bind="BkURL ?' {{BkURL}}': 'BIYAHEKO'"></span></b></div>
+	<div> <b> ALL RIGHTS RESERVED.</b></div>
+	
+	</div>
+	
+	</div>
+	
+	<div id="loading-bar-container" class="loader-Back-cover hide" style="display:none;"></div>
+	<script src="/DreamJourney/bundles/library0_1?v=0pJxfI02dFFx_bsV3ObkZrvbf-A5S3eIOE_MNIEpquo1"></script>
+
+	
+	<script src="/DreamJourney/bundles/script0_1?v=5xdBFfC_6HbZCj2pAnu9ODsnaiMs358yV2JPY-tYQWY1"></script>
+
+	
+	<script src="/DreamJourney/Content/App/Layout/Layout.js?ver=9.23" type="text/javascript"></script>
+	<script src="/DreamJourney/Content/App/Ticketing/Ticekting.js?v=9.23"></script>
+
+	<script src="/DreamJourney/Content/Lib/angular-bootstrap-calendar.min.js" type="text/javascript"></script>
+	<script src="/DreamJourney/Content/Lib/md-data-table.min.js"></script>
+
+	</body>
+	
+	</html>
+	
+
